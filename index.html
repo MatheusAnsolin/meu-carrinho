@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f3">
+  <meta name="description" content="Controle simples dos gastos no mercado.">
+  <title>Meu Carrinho</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <span class="eyebrow">CONTROLE DE COMPRAS</span>
+        <h1>Meu Carrinho<span>.</span></h1>
+        <p>Saiba quanto vai gastar antes de chegar ao caixa.</p>
+      </div>
+      <button id="clear-btn" class="button button-ghost" type="button">
+        Limpar lista
+      </button>
+    </header>
+
+    <section class="summary" aria-label="Resumo financeiro">
+      <div class="summary-item">
+        <span>Subtotal</span>
+        <strong id="subtotal">R$ 0,00</strong>
+        <small>Preços cheios</small>
+      </div>
+      <div class="summary-item discount">
+        <span>Descontos</span>
+        <strong id="discounts">R$ 0,00</strong>
+        <small>Economia nas promoções</small>
+      </div>
+      <div class="summary-item total">
+        <span>Total estimado</span>
+        <strong id="total">R$ 0,00</strong>
+        <small id="item-count">0 produtos</small>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="section-heading">
+        <div>
+          <h2 id="form-title">Adicionar produto</h2>
+          <p>Preencha somente o que souber.</p>
+        </div>
+        <span class="optional-label">Campos opcionais</span>
+      </div>
+
+      <form id="product-form" autocomplete="off">
+        <input type="hidden" id="editing-id">
+
+        <div class="form-grid">
+          <div class="field field-name">
+            <label for="name">Produto</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Ex.: Arroz 5kg"
+              maxlength="100"
+            >
+          </div>
+
+          <div class="field">
+            <label for="price">Preço cheio</label>
+            <div class="input-money">
+              <span>R$</span>
+              <input
+                id="price"
+                type="text"
+                inputmode="decimal"
+                placeholder="0,00"
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="promo">Preço promocional</label>
+            <div class="input-money">
+              <span>R$</span>
+              <input
+                id="promo"
+                type="text"
+                inputmode="decimal"
+                placeholder="0,00"
+              >
+            </div>
+          </div>
+
+          <div class="field field-small">
+            <label for="quantity">Quantidade</label>
+            <input
+              id="quantity"
+              type="number"
+              min="1"
+              step="1"
+              value="1"
+            >
+          </div>
+
+          <div class="field field-category">
+            <label for="category">Categoria</label>
+            <input
+              id="category"
+              type="text"
+              placeholder="Ex.: Mercearia"
+              maxlength="50"
+              list="category-suggestions"
+            >
+            <datalist id="category-suggestions"></datalist>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="cancel-edit" class="button button-ghost hidden" type="button">
+            Cancelar edição
+          </button>
+          <button class="button button-primary" id="submit-btn" type="submit">
+            <span id="submit-label">+ Adicionar produto</span>
+          </button>
+        </div>
+
+        <p id="form-error" class="form-error" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <div class="list-heading">
+        <div>
+          <h2>Sua lista</h2>
+          <p id="list-description">Seus produtos aparecem aqui.</p>
+        </div>
+
+        <div class="sort-control">
+          <label for="sort-mode">Ordenar por</label>
+          <select id="sort-mode">
+            <option value="insertion">Ordem de inserção</option>
+            <option value="manual">Ordem manual</option>
+            <option value="alphabetical">Ordem alfabética</option>
+            <option value="category">Categoria</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="product-list" class="product-list">
+        <div class="empty-state">
+          <span class="empty-icon">🛒</span>
+          <strong>Seu carrinho está vazio</strong>
+          <p>Adicione seu primeiro produto acima.</p>
+        </div>
+      </div>
+
+      <div id="undo-container" class="undo-container hidden">
+        <span>Produto removido.</span>
+        <button id="undo-btn" type="button">Desfazer</button>
+      </div>
+    </section>
+
+    <footer>
+      <span>Meu Carrinho · Seus dados ficam salvos neste navegador.</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
